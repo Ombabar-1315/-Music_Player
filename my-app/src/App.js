@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 
 const playlist = [
+  { title: "Shivba Raja", artist: "Avadhoot Gandhi", src: "/shivba_raja.mp3", cover: "https://images.unsplash.com/photo-1623062322302-39c0ad52c1fe?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" },
+  { title: "Raje Aale", artist: "ShivajRao", src: "/raje_aale.mp3", cover: "https://images.unsplash.com/photo-1596773359670-34509493f0b9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" },
   { title: "Lofi Study", artist: "FASSounds", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" },
   { title: "Tropical House", artist: "Alex-Productions", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" },
   { title: "Chill Ambient", artist: "Coma-Media", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", cover: "https://images.unsplash.com/photo-1478147424095-2fe654e2fe55?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" },
