@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0d0d0f;
+  color: white;
+  overflow-x: hidden;
+}
+
+.player-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Dynamic background based on cover */
+.background-blur {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(100px) brightness(0.4) saturate(1.5);
+  z-index: -2;
+  transition: background-image 1s ease-in-out;
+  animation: bgPulsate 15s infinite alternate ease-in-out;
+}
+
+@keyframes bgPulsate {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.glass-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: -1;
+}
+
+.main-layout {
+  display: flex;
+  gap: 30px;
+  max-width: 1000px;
+  width: 100%;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Player Card Styles */
+.player-card {
+  flex: 1.5;
+  min-width: 350px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cover-art-container {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.cover-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cover-art.spinning {
+  animation: spin 10s linear infinite;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.song-header h1 { 
+  font-size: 28px; 
+  font-weight: 700;
+  margin: 0; 
+  background: linear-gradient(135deg, #fff, #b3b3b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.song-header p { 
+  color: #b3b3b3; 
+  margin: 10px 0 20px; 
+  font-size: 16px; 
+  font-weight: 300;
+}
+
+/* Time Display */
+.time-display {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+/* Progress Bar */
+.progress-area {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: height 0.2s ease;
+}
+
+.progress-bar-bg:hover {
+  height: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1db954, #1ed760);
+  border-radius: 10px;
+  position: relative;
+  transition: width 0.1s linear;
+}
+
+.progress-knob {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease;
+}
+
+.progress-bar-bg:hover .progress-knob {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Controls */
+.main-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.ctrl-btn:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.icon-btn {
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.icon-btn.active-icon {
+  color: #1db954;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+}
+
+.play-circle {
+  background: linear-gradient(135deg, #1ed760, #1db954);
+  border: none;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(29, 185, 84, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.play-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(29, 185, 84, 0.5);
+}
+
+.play-circle:active {
+  transform: scale(0.95);
+}
+
+/* Volume Control */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+}
+
+.volume-icon {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;  
+  background: rgba(255,255,255,0.2);
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; 
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Playlist Styles */
+.playlist-sidebar {
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-title { 
+  font-size: 20px; 
+  margin: 0 0 20px 0; 
+  font-weight: 600;
+  color: white; 
+}
+
+.list-items {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.song-row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+}
+
+.song-row:hover { 
+  background: rgba(255, 255, 255, 0.08); 
+  transform: translateX(5px);
+}
+
+.song-row.active { 
+  background: rgba(29, 185, 84, 0.1); 
+  border-color: rgba(29, 185, 84, 0.3);
+}
+
+.row-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.row-info {
+  flex: 1;
+}
+
+.row-name { 
+  margin: 0 0 4px 0; 
+  font-size: 15px; 
+  font-weight: 600; 
+  color: white;
+}
+
+.song-row.active .row-name {
+  color: #1db954;
+}
+
+.row-artist { 
+  margin: 0; 
+  font-size: 13px; 
+  color: #999; 
+}
+
+/* Cute matching wave icon representation */
+.wave-icon {
+  color: #1ed760;
+  font-size: 18px;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+/* Custom Scrollbar */
+.list-items::-webkit-scrollbar { width: 6px; }
+.list-items::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+.list-items::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+.list-items::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  .player-card {
+    min-width: 100%;
+  }
+}
